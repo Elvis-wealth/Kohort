@@ -2,6 +2,27 @@
 
 Newest entries appear at the top.
 
+## 2026-11-24 — Piece 3: Marketing layout and homepage (scaffold)
+
+- **Feature ID:** Scaffold — Piece 3 (Marketing header, layout, homepage hero; PRD 1.1, PRD 3.4 Screen 1, PRD 4.1 Accessibility & Responsiveness)
+- **Files changed:** `src/components/marketing-header.tsx`, `src/components/marketing-header.module.css`, `src/app/page.tsx`, `src/app/page.module.css`, `src/app/(marketing)/layout.tsx`, `playwright.config.ts`, `tests/e2e/marketing.spec.ts`, `docs/progress-log.md`
+- **Commands and results:**
+  - `pnpm typecheck` (`tsc --noEmit`): passed (0 errors)
+  - `pnpm lint` (`eslint .`): passed (0 errors, 0 warnings)
+  - `pnpm format:check` (`prettier --check .`): `All matched files use Prettier code style!`
+  - `pnpm test` (`vitest run`): passed (`No test files found, exiting with code 0`)
+  - `pnpm build` (`next build`): `Compiled successfully in 2.8s`, `Finished TypeScript in 8.0s`, static pages `(4/4)`
+  - `pnpm test:e2e` (`playwright test`): `4 passed (11.5s)` across `width-360`, `width-768`, `width-1024`, `width-1440`
+- **Done when statements covered:**
+  - Shared `MarketingHeader` displays `"Kohorts"` text logo (`/`), links to `/pricing`, `/testimonials`, `/about`, `/faq`, and `"Log in"` (outlined) + `"Sign up"` (black) buttons.
+  - Below `768 px`, links and buttons sit behind a keyboard-accessible `"Menu"` / `"Close"` button with `aria-expanded`, `aria-controls`, and `Escape` close support.
+  - Homepage `/` shows only the header and a full-viewport (`100vh`/`100svh`) hero section using PRD 1.1 Description and Core bet copy, plus a black `"Sign up"` CTA.
+  - Starter `src/app/page.module.css` replaced so zero raw colour values exist outside `src/design-system/token.css`.
+  - Playwright verifies no horizontal scroll, keyboard reach, and zero axe violations at all 4 PRD widths.
+- **Open issues:**
+  - Links in the header (`/pricing`, `/testimonials`, `/about`, `/faq`, `/login`, `/signup`) will resolve to real pages in Pieces 4 and 5.
+- **Next piece proposed:** Piece 4 — Marketing pages (`/pricing`, `/testimonials`, `/about`, `/faq` inside `src/app/(marketing)/`, plus updating `tests/e2e/marketing.spec.ts`).
+
 ## 2026-11-24 — Piece 2b: Shared UI components (scaffold)
 
 - **Feature ID:** Scaffold — Piece 2b (Design base: 3 shared components; PRD 4.1 Accessibility & Responsiveness)
