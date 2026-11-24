@@ -2,6 +2,24 @@
 
 Newest entries appear at the top.
 
+## 2026-11-24 — Piece 2a: Design tokens and global stylesheet (scaffold)
+
+- **Feature ID:** Scaffold — Piece 2a (Design base split into 2a tokens + 2b components to respect the 5-file limit in AGENTS 5.2)
+- **Files changed:** `src/design-system/token.css`, `src/app/globals.css`, `src/app/layout.tsx`, `docs/progress-log.md`
+- **Commands and results:**
+  - `pnpm typecheck` (`tsc --noEmit`): passed (0 errors)
+  - `pnpm lint` (`eslint .`): passed (0 errors, 0 warnings)
+  - `pnpm format:check` (`prettier --check .`): `All matched files use Prettier code style!`
+  - `pnpm test` (`vitest run`): passed (`No test files found, exiting with code 0`)
+  - `pnpm build` (`next build`): `Compiled successfully in 1355ms`, `Finished TypeScript in 10.3s`, static pages `(4/4)`
+- **Done when statements covered:**
+  - `src/design-system/token.css` holds all colour (`#000000`, `#ffffff`, `#595959`), system font stack, spacing, border, radius, and tap-target (`44px`) CSS variables.
+  - `src/app/globals.css` uses only CSS variables from `token.css` (zero raw colour, font, or spacing values) and provides a visible keyboard focus ring.
+  - `src/app/layout.tsx` loads `token.css` globally with no web fonts.
+- **Open issues:**
+  - Default `src/app/page.module.css` from `create-next-app` still exists until Piece 3 replaces the homepage.
+- **Next piece proposed:** Piece 2b — Shared UI components (`src/components/primitives.module.css`, `src/components/button.tsx`, `src/components/text-input.tsx`, `src/components/page-container.tsx`) using only tokens from `token.css`, mobile-first from 360 px.
+
 ## 2026-11-24 — Piece 1: Project setup (scaffold)
 
 - **Feature ID:** Scaffold — Piece 1 (Project setup; AGENTS 2.1, 2.2, 2.3)
