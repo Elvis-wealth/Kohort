@@ -2,6 +2,26 @@
 
 Newest entries appear at the top.
 
+## 2026-11-24 — Piece 2b: Shared UI components (scaffold)
+
+- **Feature ID:** Scaffold — Piece 2b (Design base: 3 shared components; PRD 4.1 Accessibility & Responsiveness)
+- **Files changed:** `src/components/primitives.module.css`, `src/components/button.tsx`, `src/components/text-input.tsx`, `src/components/page-container.tsx`, `docs/progress-log.md`
+- **Commands and results:**
+  - `pnpm typecheck` (`tsc --noEmit`): passed (0 errors)
+  - `pnpm lint` (`eslint .`): passed (0 errors, 0 warnings)
+  - `pnpm format:check` (`prettier --check .`): `All matched files use Prettier code style!`
+  - `pnpm test` (`vitest run`): passed (`No test files found, exiting with code 0`)
+  - `pnpm build` (`next build`): `Compiled successfully in 672ms`, `Finished TypeScript in 6.0s`, static pages `(4/4)`
+- **Done when statements covered:**
+  - `Button` supports primary (black) and secondary (outlined) variants, optional `href` (Next.js `Link`), and minimum 44 px tap target.
+  - `TextInput` renders a visible `<label>` linked via `htmlFor`, text error message with `aria-describedby`/`aria-invalid`, and minimum 44 px height.
+  - `PageContainer` provides mobile-first (`360 px`) padding and wider (`768 px+`) layout rules.
+  - All styles in `primitives.module.css` use only CSS variables from `src/design-system/token.css` (zero raw colour, font, spacing, or radius values).
+- **Open issues:**
+  - Default `src/app/page.module.css` from `create-next-app` still exists until Piece 3 replaces the homepage.
+  - Playwright Chromium browser binaries will need to be downloaded before Piece 3 runs `pnpm test:e2e`.
+- **Next piece proposed:** Piece 3 — Marketing layout and homepage (shared marketing header with responsive mobile menu, marketing route group layout, and full-viewport hero homepage `/` using PRD 1.1 copy + Playwright e2e test).
+
 ## 2026-11-24 — Piece 2a: Design tokens and global stylesheet (scaffold)
 
 - **Feature ID:** Scaffold — Piece 2a (Design base split into 2a tokens + 2b components to respect the 5-file limit in AGENTS 5.2)
