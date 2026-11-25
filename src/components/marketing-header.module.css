@@ -61,8 +61,16 @@
   display: inline-flex;
   align-items: center;
   min-height: var(--tap-min);
+  padding: var(--space-0);
+  border: none;
+  background: none;
   font-size: var(--font-size-base);
   color: var(--color-text);
+  cursor: pointer;
+}
+
+.navLinkActive {
+  font-weight: var(--font-weight-bold);
 }
 
 .actions {

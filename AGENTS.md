@@ -146,7 +146,7 @@ Apply PRD 4.1 Security and Privacy to every feature. In addition:
 | `weekly-gate` | Manual only: the owner types `/weekly-gate` |
 
 ## Learnings
-- (none yet)
+- 2026-11-25: After deleting route files, run `pnpm build` (or clear `.next`) before `pnpm typecheck` — the stale generated `.next/types/validator.ts` still references the removed routes and fails `tsc --noEmit`.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

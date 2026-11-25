@@ -4,21 +4,30 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/button";
 import { PageContainer } from "@/components/page-container";
+import {
+  MARKETING_NAV_ITEMS,
+  type MarketingViewId,
+} from "@/components/marketing/nav";
 import styles from "./marketing-header.module.css";
 
-export const MARKETING_NAV_LINKS = [
-  { href: "/pricing", label: "Pricing" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
-] as const;
+interface MarketingHeaderProps {
+  activeView: MarketingViewId;
+  onNavigate: (view: MarketingViewId) => void;
+}
 
 interface NavPanelProps {
   open: boolean;
-  onNavigate: () => void;
+  activeView: MarketingViewId;
+  onNavigate: (view: MarketingViewId) => void;
+  onClose: () => void;
 }
 
-function MarketingNavPanel({ open, onNavigate }: NavPanelProps) {
+function MarketingNavPanel({
+  open,
+  activeView,
+  onNavigate,
+  onClose,
+}: NavPanelProps) {
   return (
     <nav
       id="marketing-nav"
@@ -26,17 +35,24 @@ function MarketingNavPanel({ open, onNavigate }: NavPanelProps) {
       className={`${styles.navPanel} ${open ? styles.navPanelOpen : ""}`}
     >
       <ul className={styles.navList}>
-        {MARKETING_NAV_LINKS.map((item) => (
-          <li key={item.href}>
-            <Link
-              href={item.href}
-              className={styles.navLink}
-              onClick={onNavigate}
-            >
-              {item.label}
-            </Link>
-          </li>
-        ))}
+        {MARKETING_NAV_ITEMS.map((item) => {
+          const active = activeView === item.id;
+          return (
+            <li key={item.id}>
+              <button
+                type="button"
+                className={`${styles.navLink} ${active ? styles.navLinkActive : ""}`}
+                aria-current={active ? "true" : undefined}
+                onClick={() => {
+                  onNavigate(item.id);
+                  onClose();
+                }}
+              >
+                {item.label}
+              </button>
+            </li>
+          );
+        })}
       </ul>
       <div className={styles.actions}>
         <Button href="/login" variant="secondary">
@@ -50,7 +66,10 @@ function MarketingNavPanel({ open, onNavigate }: NavPanelProps) {
   );
 }
 
-export function MarketingHeader() {
+export function MarketingHeader({
+  activeView,
+  onNavigate,
+}: MarketingHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -67,7 +86,11 @@ export function MarketingHeader() {
       <PageContainer>
         <div className={styles.desktopRow}>
           <div className={styles.bar}>
-            <Link href="/" className={styles.logo}>
+            <Link
+              href="/"
+              className={styles.logo}
+              onClick={() => onNavigate("home")}
+            >
               Kohorts
             </Link>
             <button
@@ -82,7 +105,9 @@ export function MarketingHeader() {
           </div>
           <MarketingNavPanel
             open={menuOpen}
-            onNavigate={() => setMenuOpen(false)}
+            activeView={activeView}
+            onNavigate={onNavigate}
+            onClose={() => setMenuOpen(false)}
           />
         </div>
       </PageContainer>
